@@ -17,7 +17,7 @@ def pin_to_ipfs(data):
         auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
     )
 		
-	
+	# check success
 	if response.status_code == 200:
 		result = response.json()
 		cid = result["Hash"]
@@ -31,4 +31,13 @@ def get_from_ipfs(cid,content_type="json"):
 	#YOUR CODE HERE	
 
 	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
-	return data
+
+	url = f"https://ipfs.infura.io:5001/api/v0/cat?arg={cid}"
+	response = requests.post(url)
+
+	if response.status_code == 200:
+		data = json.loads(response.text)
+		assert isinstance(data, dict), f"Error: get_from_ipfs should return a dictionary"
+		return data
+	else:
+		raise Exception(f"Failed to fetch data from IPFS: {response.text}")
