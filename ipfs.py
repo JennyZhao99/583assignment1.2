@@ -10,7 +10,7 @@ def pin_to_ipfs(data):
 	# convert python dictionary to JSON
 	json_data = json.dumps(data)
 
-	# upload JSON data to IPFS API
+	# upload JSON data to IPFS
 	response = requests.post(
         'https://ipfs.infura.io:5001/api/v0/add',
         files={"file": json_data},
@@ -30,14 +30,27 @@ def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
 	#YOUR CODE HERE	
 
-	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
-
 	url = f"https://ipfs.infura.io:5001/api/v0/cat?arg={cid}"
-	response = requests.post(url)
-
+	response = requests.post(
+        url,
+        auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
+    )
 	if response.status_code == 200:
 		data = json.loads(response.text)
 		assert isinstance(data, dict), f"Error: get_from_ipfs should return a dictionary"
 		return data
 	else:
 		raise Exception(f"Failed to fetch data from IPFS: {response.text}")
+
+# test
+data = {
+    "name": "Bored Ape #489",
+    "description": "A rare Bored Ape NFT",
+    "image": "ipfs://QmPAg1mjxcEQPPtqsLoEcauVedaeMH81WXDPvPx3VC5zUz"
+}
+
+try:
+    cid = pin_to_ipfs(data)
+    print(f"Data pinned to IPFS with CID: {cid}")
+except Exception as e:
+    print(e)
