@@ -17,15 +17,10 @@ def pin_to_ipfs(data):
         auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
     )
 	
-	# check if successful
-	if response.status_code == 200:
-		result = response.json()
-		cid = result["Hash"]
-		return cid
-	else:
-		raise Exception(f"Failed to pin data to IPFS: {response.text}")
+	result = response.json()
+	cid = result["Hash"]
+	return cid
 
-	#return cid
 
 def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
