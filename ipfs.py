@@ -47,14 +47,3 @@ def get_from_ipfs(cid,content_type="json"):
 #		raise Exception(f"Failed to fetch data from IPFS: {response.text}")
 
 # test
-data = {
-    "name": "Bored Ape #489",
-    "description": "A rare Bored Ape NFT",
-    "image": "ipfs://QmPAg1mjxcEQPPtqsLoEcauVedaeMH81WXDPvPx3VC5zUz"
-}
-
-try:
-    cid = pin_to_ipfs(data)
-    print(f"Data pinned to IPFS with CID: {cid}")
-except Exception as e:
-    print(e)
