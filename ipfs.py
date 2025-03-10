@@ -12,7 +12,7 @@ def pin_to_ipfs(data):
     
 	headers = {"Content-Type": "application/json", 
 			"pinata_api_key": api,
-			"pinata_secret_key": sk}
+			"pinata_secret_api_key": sk}
 
 	response = requests.post(url,headers=headers, json=data)
 	cid = response.json().get("IpfsHash", None)
