@@ -30,11 +30,13 @@ def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
 	#YOUR CODE HERE	
 
-	url = f"https://ipfs.infura.io:5001/api/v0/cat?arg={cid}"
+	url = f"https://ipfs.infura.io:5001/api/v0/cat"
+	parms =(('arg',cid))
 	response = requests.post(
-        url,
+        url,params=parms,
         auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
     )
+
 	if response.status_code == 200:
 		data = json.loads(response.text)
 		assert isinstance(data, dict), f"Error: get_from_ipfs should return a dictionary"
