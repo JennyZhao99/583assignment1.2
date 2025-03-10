@@ -14,8 +14,8 @@ def pin_to_ipfs(data):
 			"pinata_api_key": api,
 			"pinata_secret_key": sk}
 
-	result = requests.post(url,headers=headers, data = json_data)
-	cid = result.json().get("IpfsHash",None)
+	response = requests.post(url,headers=headers, data = json_data)
+	cid = response.json().get("IpfsHash")
 	return cid
 
 
@@ -27,7 +27,6 @@ def get_from_ipfs(cid,content_type="json"):
     #    ('arg',cid),
     #)
 
-	assert cid, f"Error: CID cannot be empty"
 	
 	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
 	
