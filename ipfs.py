@@ -1,9 +1,6 @@
 import requests
 import json
 
-INFURA_PROJECT_SECRET = "03016c3bbdb5494f962fcd2d8ac441f1"
-INFURA_PROJECT_ID = "m4p+cbnlUMLYT4ah/MzfUj0V79ImrMKAezPKNWBewy1RjjerfgQZfQ"
-
 def pin_to_ipfs(data):
 	assert isinstance(data,dict), f"Error pin_to_ipfs expects a dictionary"
 	#YOUR CODE HERE
@@ -14,7 +11,7 @@ def pin_to_ipfs(data):
 	response = requests.post(
         'https://ipfs.infura.io:5001/api/v0/add',
         files={"file": json_data},
-        auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
+        auth=('03016c3bbdb5494f962fcd2d8ac441f1', 'm4p+cbnlUMLYT4ah/MzfUj0V79ImrMKAezPKNWBewy1RjjerfgQZfQ')
     )
 		
 	# check success
@@ -36,7 +33,7 @@ def get_from_ipfs(cid,content_type="json"):
 	
 	response = requests.post(
         url,params=parms,
-        auth=(INFURA_PROJECT_ID, INFURA_PROJECT_SECRET)
+        auth=('03016c3bbdb5494f962fcd2d8ac441f1', 'm4p+cbnlUMLYT4ah/MzfUj0V79ImrMKAezPKNWBewy1RjjerfgQZfQ')
     )
 
 #	if response.status_code == 200:
