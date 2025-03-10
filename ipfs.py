@@ -14,7 +14,7 @@ def pin_to_ipfs(data):
 			"pinata_api_key": api,
 			"pinata_secret_key": sk}
 
-	response = requests.post(url,headers=headers, data=json_data)
+	response = requests.post(url,headers=headers, json=data)
 	cid = response.json().get("IpfsHash", None)
 	return cid
 
@@ -23,11 +23,6 @@ def pin_to_ipfs(data):
 def get_from_ipfs(cid,content_type="json"):
 	assert isinstance(cid,str), f"get_from_ipfs accepts a cid in the form of a string"
 	#YOUR CODE HERE	
-	#parms = (
-    #    ('arg',cid),
-    #)
-
-	
 	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
 	
 	response = requests.get(url)
