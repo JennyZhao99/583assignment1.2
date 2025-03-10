@@ -14,7 +14,7 @@ def pin_to_ipfs(data):
 			"pinata_api_key": api,
 			"pinata_secret_key": sk}
 
-	response = requests.post(url,headers=headers, data = json_data)
+	response = requests.post(url,headers=headers, json=data)
 	cid = response.json().get("IpfsHash")
 	return cid
 
@@ -32,6 +32,6 @@ def get_from_ipfs(cid,content_type="json"):
 	
 	response = requests.get(url)
 
-	data = json.loads(response.text)
+	data = response.json()
 	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
 	return data
