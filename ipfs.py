@@ -8,16 +8,18 @@ def pin_to_ipfs(data):
 	json_data = json.dumps(data)
 
 	# upload JSON data to IPFS
-	response = requests.post(
-        'https://api.pinata.cloud/pinning/firstkey',
-        files={"file": json_data},
-        auth=('7c9704e12c4f7db849aa', '09258d8b4c0a1597a6e67493118b416bf40950f7e451e97a336530e4f80e80e6')
-    )
-		
+	
+	url =   'https://api.pinata.cloud/pinning/pinJSONToIPFS'
+	api = '7c9704e12c4f7db849aa'
+	sk = '09258d8b4c0a1597a6e67493118b416bf40950f7e451e97a336530e4f80e80e6'
+    
+	headers = {"Content-Type": "application/json", 
+			"pinata_api_key": api,
+			"pinata_secret_key": sk}
 	# check success
 	#if response.status_code == 200:
-	result = response.json()
-	cid = result["Hash"]
+	result = requests.post(url,headers=headers, data = json_data)
+	cid = result.json().get("IpfsHash",None)
 	return cid
 	#else:
 	#	raise Exception(f"Failed to pin data to IPFS: {response.text}")
