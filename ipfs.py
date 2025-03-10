@@ -27,15 +27,12 @@ def get_from_ipfs(cid,content_type="json"):
     #    ('arg',cid),
     #)
 
+	assert cid, f"Error: CID cannot be empty"
+	
 	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
 	
 	response = requests.get(url)
 
-#	if response.status_code == 200:
 	data = json.loads(response.text)
-	assert isinstance(data, dict), f"Error: get_from_ipfs should return a dictionary"
+	assert isinstance(data,dict), f"get_from_ipfs should return a dict"
 	return data
-#	else:
-#		raise Exception(f"Failed to fetch data from IPFS: {response.text}")
-
-# test
