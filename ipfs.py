@@ -9,9 +9,9 @@ def pin_to_ipfs(data):
 
 	# upload JSON data to IPFS
 	response = requests.post(
-        'https://ipfs.infura.io:5001/api/v0/add',
+        'https://api.pinata.cloud/pinning/firstkey',
         files={"file": json_data},
-        auth=('03016c3bbdb5494f962fcd2d8ac441f1', 'm4p+cbnlUMLYT4ah/MzfUj0V79ImrMKAezPKNWBewy1RjjerfgQZfQ')
+        auth=('7c9704e12c4f7db849aa', '09258d8b4c0a1597a6e67493118b416bf40950f7e451e97a336530e4f80e80e6')
     )
 		
 	# check success
@@ -29,11 +29,11 @@ def get_from_ipfs(cid,content_type="json"):
 	parms = (
         ('arg',cid),
     )
-	url = f"https://ipfs.infura.io:5001/api/v0/cat"
+	url = f"https://gateway.pinata.cloud/ipfs/{cid}"
 	
 	response = requests.post(
         url,params=parms,
-        auth=('03016c3bbdb5494f962fcd2d8ac441f1', 'm4p+cbnlUMLYT4ah/MzfUj0V79ImrMKAezPKNWBewy1RjjerfgQZfQ')
+        auth=('7c9704e12c4f7db849aa', '09258d8b4c0a1597a6e67493118b416bf40950f7e451e97a336530e4f80e80e6')
     )
 
 #	if response.status_code == 200:
