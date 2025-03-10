@@ -16,8 +16,6 @@ def pin_to_ipfs(data):
 
 	response = requests.post(url,headers=headers, json=data)
 	cid = response.json().get("IpfsHash", None)
-	if cid is None:
-		raise ValueError("No IpfsHash returned from Pinata")
 	return cid
 
 
